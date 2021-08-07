@@ -1,89 +1,663 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
+
+<head>
+
+    {% load static %}
+    <!--====== Required meta tags ======-->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <!--====== Title ======-->
+    <title>Ayan's Portfolio</title>
 
-    <title>Ayan's Portfolio!</title>
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">TextUtils</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Contact</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown link
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-          <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
-        </div>
-      </nav>
+    <!--====== Favicon Icon ======-->
+    <link rel="shortcut icon" href="{% static 'images/Ayan-icon.png' %}" >
 
-      <div class="alert alert-success" role="alert">
-        <h4 class="alert-heading">Well done!</h4>
-        <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
-        <hr>
-        <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
-      </div>
+    <!--====== Bootstrap css ======-->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
 
-      <div class="container">
-        <form>
-            <fieldset disabled>
-              <legend>Input Text below to analyze text</legend>
-              <div class="mb-3">
-                <label for="disabledTextInput" class="form-label">Please Enter here...</label>
-                <input type="text" id="disabledTextInput" class="form-control" placeholder="Disabled input">
-              </div>
-              <div class="mb-3">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="FieldsetCheck">
-                  <label class="form-check-label" for="fieldsetCheck">
-                    Can't check this
-                  </label>
+    <!--====== Line Icons css ======-->
+    <link rel="stylesheet" href="{% static 'css/LineIcons.css'%}">
+
+    <!--====== Magnific Popup css ======-->
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css'%}">
+
+    <!--====== Default css ======-->
+    <link rel="stylesheet" href="{% static 'css/default.css'%}">
+
+    <!--====== Style css ======-->
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+
+
+</head>
+
+<body>
+
+    <!--====== PRELOADER PART START ======-->
+
+    <div class="preloader">
+        <div class="loader_34">
+            <div class="ytp-spinner">
+                <div class="ytp-spinner-container">
+                    <div class="ytp-spinner-rotator">
+                        <div class="ytp-spinner-left">
+                            <div class="ytp-spinner-circle"></div>
+                        </div>
+                        <div class="ytp-spinner-right">
+                            <div class="ytp-spinner-circle"></div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
-            </fieldset>
-          </form>
-      </div>
+            </div>
+        </div>
+    </div>
 
-    <!-- Optional JavaScript; choose one of the two! -->
+    <!--====== PRELOADER ENDS START ======-->
 
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <!--====== HEADER PART START ======-->
 
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
-    -->
-  </body>
+    <header id="home" class="header-area">
+        <div class="navigation fixed-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <nav class="navbar navbar-expand-lg">
+                            <a class="navbar-brand" href="index.html">
+                                <img src="{% static 'images/Ayan-logo.png'%}" alt="Logo">
+                            </a> <!-- Logo -->
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                            </button>
+
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav ml-auto">
+                                    <li class="nav-item active"><a class="page-scroll" href="#home">Home</a></li>
+                                    <li class="nav-item"><a class="page-scroll" href="#about">About</a></li>
+                                    <li class="nav-item"><a class="page-scroll" href="#service">Skills</a></li>
+                                    <li class="nav-item"><a class="page-scroll" href="#work">Projects</a></li>
+                                    <li class="nav-item"><a class="page-scroll" href="#blog">Blog</a></li>
+                                    <li class="nav-item"><a class="page-scroll" href="#footer">Contact</a></li>
+                                </ul>
+                            </div> <!-- navbar collapse -->
+                        </nav> <!-- navbar -->
+                    </div>
+                </div> <!-- row -->
+            </div> <!-- container -->
+        </div> <!-- navigation -->
+
+        <div id="parallax" class="header-content d-flex align-items-center">
+            <div class="header-shape shape-one layer" data-depth="0.10">
+                <img src="{% static 'images/banner/shape/shape-1.png'%}" alt="Shape">
+            </div> <!-- header shape -->
+            <div class="header-shape shape-tow layer" data-depth="0.30">
+                <img src="{% static 'images/banner/shape/shape-2.png'%}" alt="Shape">
+            </div> <!-- header shape -->
+            <div class="header-shape shape-three layer" data-depth="0.40">
+                <img src="{% static 'images/banner/shape/shape-3.png'%}" alt="Shape">
+            </div> <!-- header shape -->
+            <div class="header-shape shape-fore layer" data-depth="0.60">
+                <img src="{% static 'images/banner/shape/shape-2.png'%}" alt="Shape">
+            </div> <!-- header shape -->
+            <div class="header-shape shape-five layer" data-depth="0.20">
+                <img src="{% static 'images/banner/shape/shape-1.png'%}" alt="Shape">
+            </div> <!-- header shape -->
+            <div class="header-shape shape-six layer" data-depth="0.15">
+                <img src="{% static 'images/banner/shape/shape-4.png'%}" alt="Shape">
+            </div> <!-- header shape -->
+            <div class="header-shape shape-seven layer" data-depth="0.50">
+                <img src="{% static 'images/banner/shape/shape-5.png'%}" alt="Shape">
+            </div> <!-- header shape -->
+            <div class="header-shape shape-eight layer" data-depth="0.40">
+                <img src="{% static 'images/banner/shape/shape-3.png'%}" alt="Shape">
+            </div> <!-- header shape -->
+            <div class="header-shape shape-nine layer" data-depth="0.20">
+                <img src="{% static 'images/banner/shape/shape-6.png'%}" alt="Shape">
+            </div> <!-- header shape -->
+            <div class="header-shape shape-ten layer" data-depth="0.30">
+                <img src="{% static 'images/banner/shape/shape-3.png'%}" alt="Shape">
+            </div> <!-- header shape -->
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-xl-5 col-lg-6">
+                        <div class="header-content-right">
+                            <h4 class="sub-title">Hello, I’m</h4>
+                            <h1 class="title">Ayan Sadhukhan</h1>
+                            <p>Competitive Programmer, Full Stack Developer and ML Enthusiast</p>
+                            <a class="main-btn" href="https://drive.google.com/file/d/1kOzjiuRBJ0_q3J8Dh66OOzZYx-tvYN6f/view?usp=sharing">Resume</a>
+                        </div> <!-- header content right -->
+                    </div>
+                    <div class="col-lg-6 offset-xl-1">
+                        <div class="header-image d-none d-lg-block">
+                            <img src="{% static 'images/banner/ayan-2.png'%}" alt="hero">
+                        </div> <!-- header image -->
+                    </div>
+                </div> <!-- row -->
+            </div> <!-- container -->
+            <div class="header-social">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="header-social-icon">
+                                <ul>
+                                    <li><a href="https://github.com/ayan2809"><i class="lni lni-github"></i></a></li>
+                                    <li><a href="https://www.linkedin.com/in/ayan-sadhukhan-413471167/"><i class="lni-linkedin-original"></i></a></li>
+                                    <li><a href="https://twitter.com/mindwrapper"><i class="lni-twitter-original"></i></a></li>
+                                    <li><a href="https://medium.com/@apurva866"><i class="lni lni-medium"></i></a></li>
+                                    <li><a href="https://leetcode.com/mindwr4pper/"><i class="lni lni-code"></i></a></li>
+                                </ul>
+                            </div> <!-- header social -->
+                        </div>
+                    </div> <!-- row -->
+                </div> <!-- container -->
+            </div> <!-- header social -->
+        </div> <!-- header content -->
+    </header>
+
+    <!--====== HEADER PART ENDS ======-->
+
+    <!--====== ABOUT PART START ======-->
+
+    <section id="about" class="about-area pt-125 pb-130">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="section-title text-center">
+                        <h2 class="title">About Me</h2>
+                        <p>I am currently a 3rd year Undergraduate at VIT, Chennai, pursuing B.Tech in CSE. Currently learning
+                            Web Development, while understanding and implementing the fundamentals of computer 
+                            engineering and Data Structures in real Projects. I'm skilled in Problem Solving and Android Development using Flutter. 
+                            I am an Avid Competitive Programmer along with being an electronics geek. 
+                        </p>
+                    </div> <!-- section title -->
+                </div>
+            </div> <!-- row -->
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="about-content mt-50">
+                        <h5 class="about-title">Hey there!</h5>
+                        <p>Looking for SDE intern roles, and would like to participate in coding competitions and 
+                            hackathons. Hit me up for collaborations.
+                        </p>
+                        <ul class="clearfix">
+                            <li>
+                                <div class="single-info d-flex align-items-center">
+                                    <div class="info-icon">
+                                        <i class="lni-calendar"></i>
+                                    </div>
+                                    <div class="info-text">
+                                        <p><span>Date of birth:</span> 28th September</p>
+                                    </div>
+                                </div> <!-- single info -->
+                            </li>
+                            <li>
+                                <div class="single-info d-flex align-items-center">
+                                    <div class="info-icon">
+                                        <i class="lni-envelope"></i>
+                                    </div>
+                                    <div class="info-text">
+                                        <p><span>Email:</span> <a href="mailto:ayansadhukhan28@gmail.com">ayansadhkhan28</a></p>
+                                    </div>
+                                </div> <!-- single info -->
+                            </li>
+                            <li>
+                                <div class="single-info d-flex align-items-center">
+                                    <div class="info-icon">
+                                        <i class="lni-phone-handset"></i>
+                                    </div>
+                                    <div class="info-text">
+                                        <p><span>Phone:</span> +91 7890032256</p>
+                                    </div>
+                                </div> <!-- single info -->
+                            </li>
+                            <li>
+                                <div class="single-info d-flex align-items-center">
+                                    <div class="info-icon">
+                                        <i class="lni-map-marker"></i>
+                                    </div>
+                                    <div class="info-text">
+                                        <p><span>Location:</span> Kolkata, India</p>
+                                    </div>
+                                </div> <!-- single info -->
+                            </li>
+                        </ul>
+                    </div> <!-- about content -->
+                </div>
+                <div class="col-xl-5 offset-xl-1 col-lg-6">
+                    <div class="about-skills pt-25">
+                        <div class="skill-item mt-25">
+                            <div class="skill-header">
+                                <h6 class="skill-title">C++, Python, Java, Arduino</h6>
+                                <div class="skill-percentage">
+                                    <div class="count-box counted">
+                                        <span class="counter">80</span>
+                                    </div>
+                                    %
+                                </div>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="bar-inner">
+                                    <div class="bar progress-line" data-width="80"></div>
+                                </div>
+                            </div>
+                        </div> <!-- skill item -->
+                        <div class="skill-item mt-25">
+                            <div class="skill-header">
+                                <h6 class="skill-title">Android Flutter, Git, Github</h6>
+                                <div class="skill-percentage">
+                                    <div class="count-box counted">
+                                        <span class="counter">60</span>
+                                    </div>
+                                    %
+                                </div>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="bar-inner">
+                                    <div class="bar progress-line" data-width="60"></div>
+                                </div>
+                            </div>
+                        </div> <!-- skill item -->
+                        <div class="skill-item mt-25">
+                            <div class="skill-header">
+                                <h6 class="skill-title">Google Cloud, AWS, IOT</h6>
+                                <div class="skill-percentage">
+                                    <div class="count-box counted">
+                                        <span class="counter">40</span>
+                                    </div>
+                                    %
+                                </div>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="bar-inner">
+                                    <div class="bar progress-line" data-width="40"></div>
+                                </div>
+                            </div>
+                        </div> <!-- skill item -->
+                        <div class="skill-item mt-25">
+                            <div class="skill-header">
+                                <h6 class="skill-title">HTML/CSS/JS with Django, ML, Hadoop</h6>
+                                <div class="skill-percentage">
+                                    <div class="count-box counted">
+                                        <span class="counter">30</span>
+                                    </div>
+                                    %
+                                </div>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="bar-inner">
+                                    <div class="bar progress-line" data-width="30"></div>
+                                </div>
+                            </div>
+                        </div> <!-- skill item -->
+                    </div> <!-- about skills -->
+                </div>
+            </div> <!-- row -->
+        </div> <!-- container -->
+    </section>
+
+    <!--====== ABOUT PART ENDS ======-->
+
+    <!--====== SERVICES PART START ======-->
+
+    <section id="service" class="services-area gray-bg pt-125 pb-130">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="section-title text-center pb-30">
+                        <h2 class="title">My Skills</h2>
+                    </div> <!-- section title -->
+                </div>
+            </div> <!-- row -->
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-6 col-sm-8">
+                    <div class="single-service text-center mt-30">
+                        <div class="service-icon">
+                            <i class="lni lni-bar-chart"></i>
+                        </div>
+                        <div class="service-content">
+                            <h4 class="service-title"><a href="https://www.kaggle.com/apurvasharma866">ML Development</a></h4>
+                            <p>Using ML to aid real life problems. Skilled in data science and limited experience 
+                                with NLP, IP and CV.
+                            </p>
+                        </div>
+                    </div> <!-- single service -->
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-8">
+                    <div class="single-service text-center mt-30">
+                        <div class="service-icon">
+                            <i class="lni lni-write"></i>
+                        </div>
+                        <div class="service-content">
+                            <h4 class="service-title"><a href="./blogs.html">Technical Writing</a></h4>
+                            <p>Professionally writing technical blogs and articles on DSA and Data Science</p>
+                        </div>
+                    </div> <!-- single service -->
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-8">
+                    <div class="single-service text-center mt-30">
+                        <div class="service-icon">
+                            <i class="lni lni-cup"></i>
+                        </div>
+                        <div class="service-content">
+                            <h4 class="service-title"><a href="https://leetcode.com/ayan2809/">Data Structres and Algorithms</a></h4>
+                            <p>Interview Preparation and developing competitive coding skills</p>
+                        </div>
+                    </div> <!-- single service -->
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-8">
+                    <div class="single-service text-center mt-30">
+                        <div class="service-icon">
+                            <i class="lni lni-database"></i>
+                        </div>
+                        <div class="service-content">
+                            <h4 class="service-title"><a href="#">Database and Managements systems</a></h4>
+                            <p>Relevant CSE coursework, learnt how to create databases using SQL</p>
+                        </div>
+                    </div> <!-- single service -->
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-8">
+                    <div class="single-service text-center mt-30">
+                        <div class="service-icon">
+                            <i class="lni-website"></i>
+                        </div>
+                        <div class="service-content">
+                            <h4 class="service-title"><a href="https://github.com/ayan2809">Web Development</a></h4>
+                            <p>Learning to create frontend using HTML, CSS, JS and skilled in deploying Machine Learning Models to the web.</p>
+                        </div>
+                    </div> <!-- single service -->
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-8">
+                    <div class="single-service text-center mt-30">
+                        <div class="service-icon">
+                            <i class="lni lni-users"></i>
+                        </div>
+                        <div class="service-content">
+                            <h4 class="service-title"><a href="https://devpost.com/apurva-sharma668">Communications and Leadership</a></h4>
+                            <p>Participated in hacks & coordinated university events like Hackoff.</p>
+                        </div>
+                    </div> <!-- single service -->
+                </div>
+            </div> <!-- row -->
+        </div> <!-- container -->
+    </section>
+
+    <!--====== SERVICES PART ENDS ======-->
+
+    <!--====== WORK PART START ======-->
+
+    <section id="work" class="work-area pt-125 pb-130">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="section-title pb-25">
+                        <h2 class="title">My Recent Works</h2>
+                        <p>
+                            I participate in hackathons and in coding competitions to gain exposure and learn at a fast pace.
+                        </p>
+                    </div> <!-- section title -->
+                </div>
+            </div> <!-- row -->
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="single-work text-center mt-30">
+                        <div class="work-image">
+                            <img src="{% static 'images/work/w-1.png'%}" alt="work">
+                        </div>
+                        <div class="work-overlay">
+                            <div class="work-content">
+                                <h3 class="work-title">Visara<br>An app to predict and treat Diabetic Retinopathy</h3>
+                                <ul>
+                                    <li><a href="https://github.com/Apurva-tech/Visara"><i class="lni lni-github"></i></a></li>
+                                    <li><a href="https://visara.herokuapp.com/"><i class="lni-link"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div> <!-- single work -->
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="single-work text-center mt-30">
+                        <div class="work-image">
+                            <img src="{% static 'images/work/w-2.png'%}" alt="work">
+                        </div>
+                        <div class="work-overlay">
+                            <div class="work-content">
+                                <h3 class="work-title">EduRecruit<br>An online system to validate student information for the hiring process.</h3>
+                                <ul>
+                                    <li><a href="https://github.com/Apurva-tech/EduRecruit"><i class="lni lni-github"></i></a></li>
+                                    <li><a href="https://edurecruit.herokuapp.com/"><i class="lni-link"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div> <!-- single work -->
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="single-work text-center mt-30">
+                        <div class="work-image">
+                            <img src="{% static 'images/work/w-3.png'%}" alt="work">
+                        </div>
+                        <div class="work-overlay">
+                            <div class="work-content">
+                                <h3 class="work-title">Fembot-Twitter Bot<br>Retweets and comment on tweets by taging authorities publicly to increase the visibility of the tweets
+                                </h3>
+                                <ul>
+                                    <li><a href="https://github.com/Apurva-tech/Fem-Bot"><i class="lni lni-github"></i></a></li>
+                                    <li><a href="https://fem-bot.vercel.app/"><i class="lni-link"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div> <!-- single work -->
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="single-work text-center mt-30">
+                        <div class="work-image">
+                            <img src="{% static 'images/work/w-4.png'%}" alt="work">
+                        </div>
+                        <div class="work-overlay">
+                            <div class="work-content">
+                                <h3 class="work-title">Saaraansh<br>Web app that helps you analyse the contents of lengthy legal documents</h3>
+                                <ul>
+                                    <li><a href="https://github.com/0x-45/saaraansh"><i class="lni lni-github"></i></a></li>
+                                    <li><a href="https://saaraansh.netlify.app/"><i class="lni-link"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div> <!-- single work -->
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="single-work text-center mt-30">
+                        <div class="work-image">
+                            <img src="{% static 'images/work/w-5.png'%}" alt="work">
+                        </div>
+                        <div class="work-overlay">
+                            <div class="work-content">
+                                <h3 class="work-title">PoseBot<br>Help users correct their posture and notify them</h3>
+                                <ul>
+                                    <li><a href="https://github.com/Apurva-tech/pose-bot"><i class="lni lni-github"></i></a></li>
+                                    <li><a href="https://pose-bot.vercel.app/"><i class="lni-link"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div> <!-- single work -->
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="single-work text-center mt-30">
+                        <div class="work-image">
+                            <img src="{% static 'images/work/w-6.png'%}" alt="work">
+                        </div>
+                        <div class="work-overlay">
+                            <div class="work-content">
+                                <h3 class="work-title">Leetcode Practice and Profile</h3>
+                                <ul>
+                                    <li><a href="https://github.com/ayan2809/LeetCode"><i class="lni lni-github"></i></a></li>
+                                    <li><a href="https://leetcode.com/ayan2809/"><i class="lni-link"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div> <!-- single work -->
+                </div>
+            </div> <!-- row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="work-more text-center mt-50">
+                        <a class="main-btn" href="https://github.com/ayan2809/">More projects</a>
+                    </div> <!-- work more -->
+                </div>
+            </div> <!-- row -->
+        </div> <!-- container -->
+    </section>
+
+    <!--====== WORK PART ENDS ======-->
+
+    <!--====== BLOG PART START ======-->
+
+    <section id="blog" class="blog-area pt-125 pb-130">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="section-title text-center pb-25">
+                        <h2 class="title">Recent Blogs</h2>
+                        <p>I professionally write technical blogs on Data Science and Data Structures and Algorithms.
+                            I'm also a writer at  <a href="https://medium.com/analytics-vidhya">Analytics Vidhya</a>  
+                            and interning at <a href="https://favtutor.com/">FavTutor </a> as a Technical Writer
+                        </p>
+                    </div> <!-- section title -->
+                </div>
+            </div> <!-- row -->
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-8 col-sm-9">
+                    <div class="single-blog mt-30">
+                        <div class="blog-image">
+                            <img src="{% static 'images/blog/b-1.png'%}" alt="Blog">
+                        </div>
+                        <div class="blog-content">
+                            <h4 class="blog-title"><a href="https://favtutor.com/blogs/level-order-traversal-python">Level Order Traversal in Python</a></h4>
+                            <span>Data Structures</span>
+                        </div>
+                    </div> <!-- single blog -->
+                </div>
+                <div class="col-lg-4 col-md-8 col-sm-9">
+                    <div class="single-blog mt-30">
+                        <div class="blog-image">
+                            <img src="{% static 'images/blog/b-2.png'%}" alt="Blog">
+                        </div>
+                        <div class="blog-content">
+                            <h4 class="blog-title"><a href="https://favtutor.com/blogs/ridge-and-lasso-regression">Ridge and Lasso Regression</a></h4>
+                            <span>Data Science</span>
+                        </div>
+                    </div> <!-- single blog -->
+                </div>
+                <div class="col-lg-4 col-md-8 col-sm-9">
+                    <div class="single-blog mt-30">
+                        <div class="blog-image">
+                            <img src="{% static 'images/blog/b-3.png'%}" alt="Blog">
+                        </div>
+                        <div class="blog-content">
+                            <h4 class="blog-title"><a href="https://favtutor.com/blogs/binary-tree-height">Height of a Binary Tree</a></h4>
+                            <span>Data Structures</span>
+                        </div>
+                    </div> <!-- single blog -->
+                </div>
+            </div> <!-- row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="blog-more text-center mt-50">
+                        <a class="main-btn" href="./blogs.html">More Blogs</a>
+                    </div> <!-- blog more -->
+                </div>
+            </div> <!-- row -->
+        </div> <!-- container -->
+    </section>
+
+    <!--====== BLOG PART ENDS ======-->
+
+    <!--====== FOOTER PART START ======-->
+
+    <footer id="footer" class="footer-area">
+        <div class="footer-widget pt-130 pb-130">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="footer-content text-center">
+                            <a href="index.html">
+                                <img src="{% static 'images/logo-4.png'%}" alt="Logo">
+                            </a>
+                            <p class="mt-">Reach me out on the these platforms or <a href="mailto:ayansadhukhan28@gmail.com">Mail Me!</a></p>
+                            <ul>
+                                <li><a href="https://github.com/ayan2809"><i class="lni lni-github"></i></a></li>
+                                    <li><a href="https://www.linkedin.com/in/ayan-sadhukhan-413471167/"><i class="lni-linkedin-original"></i></a></li>
+                                    <li><a href="https://twitter.com/mindwrapper"><i class="lni-twitter-original"></i></a></li>
+                                    <li><a href="https://leetcode.com/ayan2809/"><i class="lni lni-code"></i></a></li>
+                            </ul>
+                        </div> <!-- footer content -->
+                    </div>
+                </div> <!-- row -->
+            </div> <!-- container -->
+        </div> <!-- footer widget -->
+        <div class="footer-copyright pb-20">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="copyright-text text-center pt-20">
+                            <p>Made With Dedication</p>
+                        </div> <!-- copyright text -->
+                    </div>
+                </div> <!-- row -->
+            </div> <!-- container -->
+        </div> <!-- footer widget -->
+    </footer>
+
+    <!--====== FOOTER PART ENDS ======-->
+
+    <!--====== BACK TOP TOP PART START ======-->
+
+    <a href="#" class="back-to-top"><i class="lni-chevron-up"></i></a>
+
+    <!--====== BACK TOP TOP PART ENDS ======-->
+
+
+
+
+
+
+
+    <!--====== jquery js ======-->
+    <script src="{% static 'js/vendor/modernizr-3.6.0.min.js'%}"></script>
+    <script src="{% static 'js/vendor/jquery-1.12.4.min.js'%}"></script>
+
+    <!--====== Bootstrap js ======-->
+    <script src="{% static 'js/bootstrap.min.js'%}"></script>
+    <script src="{% static 'js/popper.min.js'%}"></script>
+
+    <!--====== Magnific Popup js ======-->
+    <script src="{% static 'js/jquery.magnific-popup.min.js'%}"></script>
+
+    <!--====== Parallax js ======-->
+    <script src="{% static 'js/parallax.min.js'%}"></script>
+
+    <!--====== Counter Up js ======-->
+    <script src="{% static 'js/waypoints.min.js'%}"></script>
+    <script src="{% static 'js/jquery.counterup.min.js'%}"></script>
+
+    <!--====== Ajax Contact js ======-->
+    <script src="{% static 'js/ajax-contact.js'%}"></script>
+
+    <!--====== Appear js ======-->
+    <script src="{% static 'js/jquery.appear.min.js'%}"></script>
+
+    <!--====== Scrolling js ======-->
+    <script src="{% static 'js/scrolling-nav.js'%}"></script>
+    <script src="{% static 'js/jquery.easing.min.js'%}"></script>
+
+    <!--====== Validator js ======-->
+    <script src="{% static 'js/validator.min.js'%}"></script>
+
+    <!--====== Main js ======-->
+    <script src="{% static 'js/main.js'%}"></script>
+
+</body>
+
 </html>
