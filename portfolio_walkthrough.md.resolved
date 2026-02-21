@@ -1,0 +1,130 @@
+# Portfolio Website v3 – Architectural Walkthrough
+
+> **Purpose of this document:** This is a comprehensive, structured walkthrough of Ayan Sadhukhan's highly advanced v3 personal portfolio website. Feed this entire document into Gemini and ask it to generate a detailed prompt that can be used with Gemini 3.1 Pro to further analyze or expand this updated portfolio.
+
+---
+
+## 1. Tech Stack & Build System
+
+| Layer | Technology | Details |
+|---|---|---|
+| **Bundler** | Vite 7.2.4 | Dev server, HMR, production build |
+| **Markup** | Vanilla HTML5 | Single [index.html](file:///Volumes/Projects/Portfolio/index.html) structure |
+| **Styling** | Vanilla CSS | Single [main.css](file:///Volumes/Projects/Portfolio/src/styles/main.css) with CSS variables, CRT scanlines, and Light/Dark themes |
+| **Interactivity** | Vanilla JS (ES Module) | Single [main.js](file:///Volumes/Projects/Portfolio/src/main.js) driving Three.js, IntersectionObservers, and API fetching |
+| **Font** | Google Fonts – Inter | Weights: 300, 400, 500, 600, 700 |
+| **Hosting** | AWS S3 + CloudFront | Static hosting with CDN and HTTPS |
+
+No React, Vue, or Tailwind. Pure HTML/CSS/JS served directly through Vite. The codebase has been stripped of all unused boilerplate to maximize efficiency.
+
+---
+
+## 2. File Structure
+
+```
+Portfolio/
+├── index.html              # Single-page HTML (all content + SEO Meta + JSON-LD)
+├── package.json            # Vite build scripts
+├── bucket-policy.json      # AWS S3 bucket policy
+├── cloudfront-config.json  # CloudFront distribution config
+└── src/
+    ├── main.js             # Core JS: Three.js WebGL, Terminal Emulator, SVG Sparklines, Intersection Flow
+    └── styles/
+        └── main.css        # Core styles: Design system, CRT scanlines, SVG Animations
+```
+
+> **Note:** All default Vite boilerplate ([vite.svg](file:///Volumes/Projects/Portfolio/public/vite.svg), [style.css](file:///Volumes/Projects/Portfolio/src/style.css), [javascript.svg](file:///Volumes/Projects/Portfolio/src/javascript.svg), [counter.js](file:///Volumes/Projects/Portfolio/src/counter.js)) has been permanently deleted.
+
+---
+
+## 3. SEO & Accessibility Rigor
+
+- **Meta Tags:** Open Graph (`og:title`, `og:image`, etc.) and Twitter Cards (`twitter:card`) are configured for rich link sharing.
+- **Structured Data:** A `<script type="application/ld+json">` block injects a complete `Person` schema, mapping Ayan Sadhukhan to his job, employer (JP Morgan), University (VIT), and relevant skills.
+- **Favicon:** Uses an inline SVG data-uri lightning bolt `⚡`.
+- **A11y:** A `@media (prefers-reduced-motion: reduce)` query has been added to [main.css](file:///Volumes/Projects/Portfolio/src/styles/main.css). This physically removes the canvas element and disables all custom CSS hover/spin/pulse animations to provide a calm experience for users sensitive to motion.
+
+---
+
+## 4. JS & CSS Core Features
+
+### 4.1 WebGL "Cluster" Visualization (Three.js Hero)
+Behind the hero text sits a lightweight, pure-code Three.js scene ([main.js](file:///Volumes/Projects/Portfolio/src/main.js)).
+- **Design:** Renders a 3D node graph representing a distributed Kubernetes cluster. A subtle Bloom post-processing pass (`EffectComposer`) makes active nodes emit a realistic neon glow against the dark theme.
+- **Interaction:** Utilizes custom raycasting. Hovering over a 3D node scales it up, and a pure HTML/CSS tooltip perfectly tracks the mouse in 3D space, displaying mock telemetry (e.g., "Pod: Search-API | Latency: 12ms | Status: Healthy").
+- **Performance:** Degrades gracefully via `@media (prefers-reduced-motion)` and halts the `requestAnimationFrame` loop on `visibilitychange` (when the tab is backgrounded).
+
+### 4.2 The "Data Pipeline" Scroll Flow
+A continuous flow of data guides the user down the page from top to bottom.
+- **Design:** A complex absolute SVG `<path>` weaves precisely through the Experience, Skills, and Projects sections.
+- **Animation:** Uses vanilla JS and `IntersectionObserver` to animate the `stroke-dashoffset` in real-time syncing with the user's scroll position.
+- **Packets:** Glowing `<circle>` SVGs dynamically travel down the path utilizing `getPointAtLength` as sections intersect the viewport.
+
+### 4.3 The "Quake-Style" Terminal Overlay
+A hidden, functional CLI is built directly into the DOM to highlight engineering prowess.
+- **Interaction:** Drops down from the top of the screen via a CSS transform when the user presses backtick (\`) or `Ctrl + K`.
+- **Design:** Styled with a subtle CRT scanline linear gradient, green monospace font, and a keyframe-driven blinking block cursor.
+- **Commands:** A comprehensive switch-statement parser handles commands (with Up/Down arrow history): `help`, `theme --toggle`, `cat resume.txt`, `fetch leetcode` (with simulated async delays), and `status`.
+
+### 4.4 Client-Side "Telemetry" Dashboard (SVG Sparklines)
+Located right below the Skills section, analyzing GitHub activity dynamically without bulky charting dependencies.
+- **Data Integration:** Fetches `api.github.com/users/ayan2809/repos`, aggregating `stargazers_count` and `size` data chronologically. Implements `sessionStorage` caching (1-hour TTL) to prevent rate limits.
+- **Visualization:** A vanilla JS layout engine generates smooth, Catmull-Rom approximated quadratic bezier SVG curves (`Q`) on the fly. Utilizes CSS `stroke-dashoffset` for an intricate draw-in animation with an opacity gradient fill.
+
+### 4.2 Seamless Light/Dark Mode Toggle
+- **UI:** A custom button in the navigation bar interpolates between a Sun and Moon SVG using CSS opacity and rotation transforms.
+- **State Mgmt ([main.js](file:///Volumes/Projects/Portfolio/src/main.js)):** Checks `localStorage` or `window.matchMedia('(prefers-color-scheme: light)')` on load and applies a `[data-theme="light"]` attribute to the `<html>` root.
+- **CSS ([main.css](file:///Volumes/Projects/Portfolio/src/styles/main.css)):** The default root variables dictate the Dark theme. The Light theme swaps out `--bg-primary`, `--text-primary`, and box-shadow variables while retaining the custom accent indigo/cyan gradients.
+- **Transitioning:** A global `--transition-colors` ensures that switching from dark to light triggers a smooth 400ms crossfade across the entire application interface.
+
+### 4.3 Code-Based SVG Animations
+Standard emojis in the Experience, Education, and Contact sections were replaced with pristine, inline `<svg>` elements.
+- **Styling:** CSS classes define scalable strokes (`stroke: var(--text-primary)`).
+- **Hover Micro-interactions:**
+  - `.icon-animated`: Base class causing a 1.1x scale and a stroke color transition to the primary accent color.
+  - `.icon-pulse`: Triggers an infinite `@keyframes svg-pulse` scaling effect (e.g., the analytics graph icon).
+  - `.icon-float`: Triggers a 3s `@keyframes svg-float` hovering effect (e.g., the robot context engineering icon).
+  - `.icon-spin`: Triggers a continuous 360-degree `@keyframes svg-spin` (e.g., the rocket performance optimization icon).
+
+### 4.4 Optimized Scroll Listeners
+The sticky nav highlighting and parallax hero effect rely on `window.pageYOffset`. In [main.js](file:///Volumes/Projects/Portfolio/src/main.js), this scroll listener is wrapped tightly inside a `requestAnimationFrame` throttle, preventing forced synchronous layouts and keeping the site locked at 60fps even under heavy scrolling.
+
+---
+
+## 5. Page Sections (in order)
+
+The portfolio navigates linearly via smooth-scrolling anchor links. Highlights include:
+
+### Hero
+- Interactive canvas background.
+- Parallax: Text translates up and drops opacity on scroll.
+- Entrance Animation: High-performance CSS `@keyframes entranceFadeUp` tied to CSS variables (`--stagger: 1`, `--stagger: 2`) orchestrates a staggered slide-in load sequence for the intro text.
+
+### About & Experience
+- Detailed text establishing Ayan as a Backend Engineer at JPMorgan serving 18M+ users. Specializes in scalable backend architectures (AWS Lambda/S3/OpenSearch).
+- 6 highlight cards (API Development, Scalable System Design, Context Engineering, Performance Optimization, Cloud-Native, Observability) utilizing the new, custom animated SVGs.
+
+### Skills & Certifications
+- Tag-based grid covering Python, Java, AWS, Kubernetes, OpenSearch, etc.
+- Responsive flex cards for three AWS certifications linking to Credly (Developer Associate, Solutions Architect Associate, and Machine Learning Specialty).
+
+### Projects & Open Source (Dynamic Content)
+1. **GitHub Pinned Repos (Dynamic):** [main.js](file:///Volumes/Projects/Portfolio/src/main.js) hits `api.github.com/users/ayan2809/repos` directly. It filters public, non-forked repos, sorts by `stargazers_count`, and maps the top 3 into responsive CSS cards. Renders repo name, description, primary language, stars, and forks cleanly. Includes a `repo-error` fallback linking to GitHub if the fetch fails (or hits a rate limit).
+2. **QuesGen (Static):** The featured hackathon-winning application remains highlighted below the GitHub grid.
+
+### Achievements & Education
+- Timeline list tracking hackathon wins (Hackatra, Hack36) and the Amazon ML Summer School.
+- Education block detailing VIT Chennai (CGPA 9.01/10).
+
+### Contact (Form & Links)
+- **Direct Links:** Responsive grid for Email, GitHub, LinkedIn, and LeetCode (all utilizing custom SVG icon hover animations).
+- **Contact Form UI:** Beautiful static HTML form requiring Name, Email, and Message.
+- **Contact Form Mock ([main.js](file:///Volumes/Projects/Portfolio/src/main.js)):** Intercepts submit, swaps button to an SVG spinner, waits 1.5 seconds, then displays a green success state to simulate backend connectivity. (Currently poised to be wired into AWS API Gateway + Lambda + SES).
+
+---
+
+## 6. How to Use This Document
+
+Feed this entire upgraded document to Gemini with a prompt like:
+
+> "I have just completed a massive Phase 1-4 structural V3 overhaul of my portfolio website. Based on this new walkthrough outlining the current state of my WebGL Three.js node cluster, IntersectionObserver SVG data pipelines, Quake-style Dev Terminal, and custom vanilla SVG sparklines for GitHub telemetry, generate a new comprehensive prompt for Gemini 3.1 Pro. The new prompt should focus on the NEXT LEVEL of iteration—e.g., integrating an AI backend to make the Dev Terminal fully conversational, migrating the application to an SSR edge-compute framework for SEO mastery, or orchestrating complex 3D shader manipulation."

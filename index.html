@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Ayan Sadhukhan - Backend Engineer specializing in distributed systems, Kubernetes, and AWS. Building search infrastructure and microservices at scale." />
+  <meta name="keywords"
+    content="Ayan Sadhukhan, Software Engineer, Backend Engineer, Distributed Systems, Kubernetes, AWS, Java, Python" />
+  <meta name="author" content="Ayan Sadhukhan" />
+
+  <!-- Open Graph / LinkedIn / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ayansadhukhan.com/" />
+  <meta property="og:title" content="Ayan Sadhukhan | Senior Backend Engineer" />
+  <meta property="og:description"
+    content="Backend engineer focused on distributed systems, Kubernetes, and AWS. Currently serving 18M+ users." />
+  <meta property="og:image" content="https://ayansadhukhan.com/og-image.jpg" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://ayansadhukhan.com/" />
+  <meta name="twitter:title" content="Ayan Sadhukhan | Senior Backend Engineer" />
+  <meta name="twitter:description"
+    content="Backend engineer focused on distributed systems, Kubernetes, and AWS. Currently serving 18M+ users." />
+  <meta name="twitter:image" content="https://ayansadhukhan.com/og-image.jpg" />
+
+  <!-- JSON-LD Structured Data Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Ayan Sadhukhan",
+    "jobTitle": "Software Engineer",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "JP Morgan Chase & Co."
+    },
+    "url": "https://ayansadhukhan.com",
+    "sameAs": [
+      "https://github.com/ayan2809",
+      "https://linkedin.com/in/ayan-sadhukhan"
+    ],
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "Vellore Institute of Technology"
+    },
+    "knowsAbout": ["Backend Engineering", "Distributed Systems", "Kubernetes", "AWS", "Python", "Java", "Search Infrastructure"]
+  }
+  </script>
+
+  <title>Ayan Sadhukhan | Software Engineer</title>
+
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/styles/main.css">
+</head>
+
+<body>
+  <!-- Data Pipeline Overlay (Phase 2) -->
+  <div id="pipeline-container" class="pipeline-container">
+    <svg id="pipeline-svg" xmlns="http://www.w3.org/2000/svg">
+      <path id="pipeline-path" fill="none" class="pipeline-path" />
+      <circle id="pipeline-packet-1" class="pipeline-packet" r="4" />
+      <circle id="pipeline-packet-2" class="pipeline-packet" r="4" />
+      <circle id="pipeline-packet-3" class="pipeline-packet" r="4" />
+    </svg>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-container">
+      <a href="#" class="nav-logo">AS</a>
+      <button class="nav-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-menu">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li>
+          <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+            <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero">
+    <canvas id="hero-canvas" class="hero-canvas"></canvas>
+    <div id="node-tooltip" class="tech-tooltip"></div>
+    <div class="hero-content">
+      <div class="hero-greeting animate-entrance" style="--stagger: 1">Hi, I'm</div>
+      <h1 class="hero-name animate-entrance" style="--stagger: 2">Ayan Sadhukhan</h1>
+      <h2 class="hero-title animate-entrance" style="--stagger: 3">Software Engineer</h2>
+      <p class="hero-description animate-entrance" style="--stagger: 4">
+        Backend engineer focused on distributed systems, Kubernetes, and AWS.<br>
+        I build search infrastructure and microservices that handle real-scale traffic.
+      </p>
+      <div class="hero-cta animate-entrance" style="--stagger: 5">
+        <a href="#experience" class="btn btn-primary">View My Work</a>
+        <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+      </div>
+    </div>
+    <div class="hero-scroll animate-entrance" style="--stagger: 6">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="section about">
+    <div class="container">
+      <h2 class="section-title">About Me</h2>
+      <div class="about-content">
+        <p>
+          I'm a backend engineer at <strong>JPMorgan Chase</strong> working on distributed systems
+          and search infrastructure. My focus is on building services that are
+          fast, reliable, and maintainable at scale—currently serving <strong>18M+ users</strong>.
+        </p>
+        <p>
+          I specialize in designing scalable backend architectures, ETL pipelines,
+          and cloud-native services. I've reduced data latency by <strong>5×</strong> through
+          concurrency strategies and built context-aware personalization systems
+          for AI agents and chatbots.
+        </p>
+        <p>
+          I value <em>clarity over cleverness</em>, and I'd rather ship something that
+          works reliably than something impressive that breaks under load.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section id="experience" class="section experience">
+    <div class="container">
+      <h2 class="section-title">Experience</h2>
+
+      <div class="experience-card">
+        <div class="experience-header">
+          <div class="experience-company">
+            <h3>JP Morgan Chase & Co.</h3>
+            <span class="experience-location">Bangalore, India</span>
+          </div>
+          <div class="experience-meta">
+            <span class="experience-role">Software Engineer</span>
+            <span class="experience-duration">February 2023 – Present</span>
+          </div>
+        </div>
+
+        <div class="experience-highlights">
+          <div class="highlight-card">
+            <div class="highlight-icon">
+              <svg class="icon-animated" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+            </div>
+            <h4>Backend API & Service Development</h4>
+            <p>Designed and built high-performance backend services and REST APIs using Python (Flask, FastAPI) and Java
+              (Spring Boot), supporting real-time data access for systems serving <strong>18M+ users</strong>.</p>
+          </div>
+
+          <div class="highlight-card">
+            <div class="highlight-icon">
+              <svg class="icon-animated icon-pulse" xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+              </svg>
+            </div>
+            <h4>Scalable System Design</h4>
+            <p>Built scalable backend architectures for ETL pipelines using AWS Lambda, S3, and OpenSearch.
+              <strong>Reduced latency by 5×</strong> (25 min → 5 min) using concurrency and parallel processing.
+            </p>
+          </div>
+
+          <div class="highlight-card">
+            <div class="highlight-icon">
+              <svg class="icon-animated icon-float" xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+                <circle cx="12" cy="5" r="2"></circle>
+                <path d="M12 7v4"></path>
+                <line x1="8" y1="16" x2="8" y2="16"></line>
+                <line x1="16" y1="16" x2="16" y2="16"></line>
+              </svg>
+            </div>
+            <h4>Context Engineering & Personalization</h4>
+            <p>Developed backend service to process user-session signals and maintain conversational memory for response
+              personalization used by Agents and Chatbots.</p>
+          </div>
+
+          <div class="highlight-card">
+            <div class="highlight-icon">
+              <svg class="icon-animated icon-spin" xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242M12 12v9"></path>
+                <polyline points="8 17 12 21 16 17"></polyline>
+              </svg>
+            </div>
+            <h4>Performance Optimization</h4>
+            <p>Optimized backend performance through intelligent batching, parallel execution, and query tuning.
+              Designed systems with cache-friendly access patterns.</p>
+          </div>
+
+          <div class="highlight-card">
+            <div class="highlight-icon">
+              <svg class="icon-animated icon-float" xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path>
+              </svg>
+            </div>
+            <h4>Cloud-Native & Containerized</h4>
+            <p>Deployed services in Dockerized, Kubernetes-based environments (EKS) with autoscaling using HPA. Managed
+              infrastructure using Infrastructure as Code.</p>
+          </div>
+
+          <div class="highlight-card">
+            <div class="highlight-icon">
+              <svg class="icon-animated icon-pulse" xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+              </svg>
+            </div>
+            <h4>Observability & Reliability</h4>
+            <p>Implemented monitoring with Splunk, Datadog, and Dynatrace. Performed chaos testing with Gremlin to
+              validate system resilience.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="section skills">
+    <div class="container">
+      <h2 class="section-title">Technical Skills</h2>
+
+      <div class="skills-grid">
+        <div class="skill-category">
+          <h3>Languages</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">Java</span>
+            <span class="skill-tag">SQL</span>
+            <span class="skill-tag">C++</span>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3>Frameworks</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">FastAPI</span>
+            <span class="skill-tag">Flask</span>
+            <span class="skill-tag">Spring Boot</span>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3>Cloud & Containers</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">AWS Lambda</span>
+            <span class="skill-tag">AWS S3</span>
+            <span class="skill-tag">AWS EKS</span>
+            <span class="skill-tag">Docker</span>
+            <span class="skill-tag">Kubernetes</span>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3>Databases</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">OpenSearch</span>
+            <span class="skill-tag">Cassandra</span>
+            <span class="skill-tag">Redis</span>
+            <span class="skill-tag">FAISS</span>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3>Infrastructure</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Terraform</span>
+            <span class="skill-tag">CI/CD</span>
+            <span class="skill-tag">Jenkins</span>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3>Observability</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Splunk</span>
+            <span class="skill-tag">Datadog</span>
+            <span class="skill-tag">Dynatrace</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Telemetry Dashboard -->
+  <section id="telemetry" class="section telemetry">
+    <div class="container">
+      <h2 class="section-title">System Telemetry</h2>
+      <div class="telemetry-grid">
+        <div class="telemetry-card">
+          <div class="telemetry-header">
+            <h3>Cumulative Repository Stars</h3>
+            <span class="telemetry-value" id="telemetry-stars-val">...</span>
+          </div>
+          <div class="telemetry-chart">
+            <svg id="sparkline-stars" preserveAspectRatio="none" viewBox="0 0 100 30"></svg>
+          </div>
+        </div>
+        <div class="telemetry-card">
+          <div class="telemetry-header">
+            <h3>Codebase Footprint (KB)</h3>
+            <span class="telemetry-value" id="telemetry-size-val">...</span>
+          </div>
+          <div class="telemetry-chart">
+            <svg id="sparkline-size" preserveAspectRatio="none" viewBox="0 0 100 30"></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certifications Section -->
+  <section id="certifications" class="section certifications">
+    <div class="container">
+      <h2 class="section-title">Certifications</h2>
+
+      <div class="certifications-grid">
+        <a href="https://www.credly.com/badges/7127b9df-79e7-49b7-bc82-d3f85bc88468/linked_in_profile" target="_blank"
+          rel="noopener" class="cert-card">
+          <div class="cert-badge">
+            <img src="https://images.credly.com/size/340x340/images/b9feab85-1a43-4f6c-99a5-631b88d5461b/image.png"
+              alt="AWS Developer Associate Badge">
+          </div>
+          <div class="cert-info">
+            <h3>AWS Certified Developer</h3>
+            <span class="cert-level">Associate</span>
+            <span class="cert-date">April 2025</span>
+          </div>
+          <span class="cert-link">View Credential →</span>
+        </a>
+
+        <a href="https://www.credly.com/badges/24f898ed-ebc2-49bd-b13e-2d6ee880285b/linked_in_profile" target="_blank"
+          rel="noopener" class="cert-card">
+          <div class="cert-badge">
+            <img src="https://images.credly.com/size/340x340/images/0e284c3f-5164-4b21-8660-0d84737941bc/image.png"
+              alt="AWS Solutions Architect Associate Badge">
+          </div>
+          <div class="cert-info">
+            <h3>AWS Certified Solutions Architect</h3>
+            <span class="cert-level">Associate</span>
+            <span class="cert-date">March 2025</span>
+          </div>
+          <span class="cert-link">View Credential →</span>
+        </a>
+
+        <a href="https://www.credly.com/badges/6cac266e-214b-4ceb-bc1c-f3369fa26ab2/linked_in_profile" target="_blank"
+          rel="noopener" class="cert-card">
+          <div class="cert-badge">
+            <img src="https://images.credly.com/size/340x340/images/778bde6c-ad1c-4312-ac33-2fa40d50a147/image.png"
+              alt="AWS Certified Machine Learning Specialty Badge">
+          </div>
+          <div class="cert-info">
+            <h3>AWS Certified Machine Learning</h3>
+            <span class="cert-level" style="color: #a855f7;">Specialty</span>
+            <span class="cert-date">October 2025</span>
+          </div>
+          <span class="cert-link">View Credential →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="section projects">
+    <div class="container">
+      <h2 class="section-title">Projects & Open Source</h2>
+      <p class="section-subtitle" style="margin-top: -3rem; margin-bottom: 3rem; color: var(--text-secondary);">A
+        showcase of featured work and pinned repositories.</p>
+
+      <!-- Dynamic GitHub Section -->
+      <div id="github-repos" class="github-repos-grid">
+        <div class="repo-loading">
+          <svg class="icon-spin" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12a9 9 0 1 1-6.219-8.56"></path>
+          </svg>
+          <span>Fetching pinned repositories from GitHub...</span>
+        </div>
+      </div>
+
+      <div class="project-card featured" style="margin-top: 2rem;">
+        <div class="project-header">
+          <div class="project-title-row">
+            <h3>QuesGen</h3>
+            <div class="project-links">
+              <a href="https://github.com/ayan2809/EduHelper" target="_blank" rel="noopener" class="project-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path
+                    d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                  </path>
+                </svg>
+                GitHub
+              </a>
+              <a href="https://youtu.be/GymonEIIwWA" target="_blank" rel="noopener" class="project-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+                Demo
+              </a>
+            </div>
+          </div>
+          <span class="project-subtitle">Self-Assessment Tool for Learning</span>
+          <span class="project-date">January 2022 – April 2022</span>
+        </div>
+
+        <p class="project-description">
+          A web application to improve learning of students right after taking any online class or course.
+          Generates 4 different question types: <strong>MCQ, Paraphrase, Boolean, and FAQ</strong>.
+        </p>
+
+        <div class="project-achievements">
+          <span class="achievement-badge">🏆 Won 2 Hackathons</span>
+          <span class="achievement-badge">💰 ₹1,00,000 Total Prize</span>
+        </div>
+
+        <div class="project-tech">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">Flask</span>
+          <span class="tech-tag">PyTorch</span>
+          <span class="tech-tag">NLTK</span>
+          <span class="tech-tag">NLP</span>
+          <span class="tech-tag">HTML/CSS/JS</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Achievements Section -->
+  <section id="achievements" class="section achievements">
+    <div class="container">
+      <h2 class="section-title">Achievements</h2>
+
+      <div class="achievements-timeline">
+        <div class="achievement-item">
+          <div class="achievement-date">July 2022</div>
+          <div class="achievement-content">
+            <h3>Amazon ML Summer School</h3>
+            <p>Selected as mentee from <strong>20,000+ applicants</strong></p>
+          </div>
+        </div>
+
+        <div class="achievement-item">
+          <div class="achievement-date">May 2022</div>
+          <div class="achievement-content">
+            <h3>Hackatra Winner</h3>
+            <p>Built QuesGen • 300+ teams • <strong>₹20,000</strong></p>
+          </div>
+        </div>
+
+        <div class="achievement-item">
+          <div class="achievement-date">April 2022</div>
+          <div class="achievement-content">
+            <h3>Hack36 Winner</h3>
+            <p>QuesGen selected as top project • 500+ teams • <strong>₹30,000</strong></p>
+          </div>
+        </div>
+
+        <div class="achievement-item">
+          <div class="achievement-date">April 2022</div>
+          <div class="achievement-content">
+            <h3>Innerve 6.0 Runners-Up</h3>
+            <p>Recognized for QuesGen • 1,000+ teams • <strong>₹50,000</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education Section -->
+  <section id="education" class="section education">
+    <div class="container">
+      <h2 class="section-title">Education</h2>
+
+      <div class="education-card">
+        <div class="education-icon">
+          <svg class="icon-animated icon-float" xmlns="http://www.w3.org/2000/svg" width="40" height="40"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+            <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+          </svg>
+        </div>
+        <div class="education-content">
+          <h3>Vellore Institute of Technology</h3>
+          <span class="education-location">Chennai, India</span>
+          <p class="education-degree">Bachelor of Engineering – Computer Science</p>
+          <div class="education-meta">
+            <span class="education-cgpa"><strong>CGPA: 9.01/10</strong></span>
+            <span class="education-duration">June 2019 – July 2023</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section contact">
+    <div class="container">
+      <h2 class="section-title">Get in Touch</h2>
+      <p class="contact-intro">
+        I'm always interested in hearing about new opportunities,
+        interesting projects, or just having a chat about distributed systems.
+      </p>
+
+      <div class="contact-grid">
+        <a href="mailto:ayansadhukhan28@gmail.com" class="contact-card">
+          <div class="contact-icon">
+            <svg class="icon-animated" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+            </svg>
+          </div>
+          <span class="contact-label">Email</span>
+          <span class="contact-value">ayansadhukhan28@gmail.com</span>
+        </a>
+
+        <a href="https://github.com/ayan2809" target="_blank" rel="noopener" class="contact-card">
+          <div class="contact-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+            </svg>
+          </div>
+          <span class="contact-label">GitHub</span>
+          <span class="contact-value">ayan2809</span>
+        </a>
+
+        <a href="https://linkedin.com/in/ayan-sadhukhan" target="_blank" rel="noopener" class="contact-card">
+          <div class="contact-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+            </svg>
+          </div>
+          <span class="contact-label">LinkedIn</span>
+          <span class="contact-value">Ayan Sadhukhan</span>
+        </a>
+
+        <a href="https://leetcode.com/eZZoP" target="_blank" rel="noopener" class="contact-card">
+          <div class="contact-icon">
+            <svg class="icon-animated" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="16 18 22 12 16 6"></polyline>
+              <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+          </div>
+          <span class="contact-label">LeetCode</span>
+          <span class="contact-value">eZZoP</span>
+        </a>
+      </div>
+
+      <!-- Contact Form Structure -->
+      <div class="contact-form-container">
+        <h3 style="font-size: var(--font-size-2xl); font-weight: 600; margin-bottom: var(--space-2); text-align: left;">
+          Send a Message</h3>
+        <p class="form-description"
+          style="color: var(--text-secondary); margin-bottom: var(--space-6); text-align: left;">Need to reach out
+          directly? Fill out the form below.</p>
+        <form id="contact-form" class="contact-form">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required placeholder="Jane Doe" autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required placeholder="jane@example.com" autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required
+              placeholder="Hi Ayan, I'd like to talk about..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-submit">
+            <span class="btn-text">Send Message</span>
+            <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+          <div id="form-status" class="form-status"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2025 Ayan Sadhukhan. Built with ☕ and code.</p>
+    </div>
+  </footer>
+
+  <!-- Phase 3: Dev Terminal Overlay -->
+  <div id="dev-terminal" class="dev-terminal">
+    <div class="terminal-header">
+      <span class="terminal-title">~/portfolio.exe (v3.0.0-rc1)</span>
+      <button class="terminal-close" aria-label="Close terminal">×</button>
+    </div>
+    <div class="terminal-body" id="terminal-output">
+      <div class="terminal-log">AyanOS v3 initialized. Access granted.</div>
+      <div class="terminal-log">Type 'help' for a list of available commands.</div>
+    </div>
+    <div class="terminal-input-wrapper">
+      <span class="terminal-prompt">guest@ayan:~$</span>
+      <input type="text" id="terminal-input" class="terminal-input" autocomplete="off" spellcheck="false" autofocus>
+      <span class="terminal-cursor"></span>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
