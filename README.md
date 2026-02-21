@@ -3,7 +3,7 @@
 Welcome to the source repository for my personal portfolio website, version 3. This project is a highly advanced, performance-optimized Single Page Application (SPA) built without heavy frontend frameworks (no React, Vue, or Tailwind) to demonstrate complete mastery over the DOM, WebGL, and modern browser APIs.
 
 ## 🚀 Live Demo
-*(Insert Live Production URL Here, e.g., https://ayansadhukhan.com)*
+[https://d1j3ndwdltz090.cloudfront.net](https://d1j3ndwdltz090.cloudfront.net)
 
 ## 🧠 Architectural Philosophy
 This portfolio is engineered with the same rigor applied to backend distributed systems: **Clarity over cleverness, and performance above all.**
