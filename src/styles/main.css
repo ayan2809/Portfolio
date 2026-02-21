@@ -601,55 +601,159 @@ button {
 }
 
 /* ===================================
-   Skills Section
+   Skills Section — D3 Force Graph
    =================================== */
 
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: var(--space-6);
-}
-
-.skill-category {
-  padding: var(--space-6);
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  transition: border-color var(--transition-base);
-}
-
-.skill-category:hover {
-  border-color: var(--border-color-hover);
-}
-
-.skill-category h3 {
-  font-size: var(--font-size-sm);
-  font-weight: 600;
+.skills-subtitle {
+  text-align: center;
   color: var(--text-tertiary);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: var(--space-4);
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--space-6);
+  margin-top: calc(-1 * var(--space-3));
+  letter-spacing: 0.01em;
 }
 
-.skill-tags {
+.skills-graph-container {
+  width: 100%;
+  height: 540px;
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: var(--radius-xl);
+  background: #0d0d10;
+  overflow: hidden;
+  position: relative;
+  cursor: grab;
+  box-shadow: inset 0 0 80px rgba(99, 102, 241, 0.04);
+}
+
+.skills-graph-container:active {
+  cursor: grabbing;
+}
+
+/* Links */
+.graph-link {
+  stroke-opacity: 0.22;
+  stroke-width: 1;
+  fill: none;
+  transition: stroke-opacity 0.25s, stroke-width 0.25s;
+}
+
+.graph-link.link-highlighted {
+  stroke-opacity: 0.85;
+  stroke-width: 1.5;
+  animation: pulse-link 1.2s linear infinite;
+}
+
+@keyframes pulse-link {
+  0% {
+    stroke-dashoffset: 24;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Nodes */
+.graph-node circle {
+  stroke-width: 1.5;
+  cursor: pointer;
+  transition: opacity 0.25s, filter 0.2s;
+}
+
+.graph-node.hub circle {
+  stroke-width: 2;
+}
+
+.graph-node text {
+  font-family: var(--font-family);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Hub labels — always visible, centered inside circle */
+.graph-node text.hub-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  fill: #ffffff;
+  text-anchor: middle;
+  dominant-baseline: central;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+/* Leaf labels — always visible, positioned below circle */
+.graph-node text.leaf-label {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-anchor: middle;
+  dominant-baseline: hanging;
+  opacity: 0.75;
+  transition: opacity 0.2s, fill 0.2s;
+}
+
+.graph-node:hover text.leaf-label {
+  opacity: 1;
+}
+
+.graph-node.dimmed {
+  opacity: 0.15;
+}
+
+/* Skills legend */
+.skills-legend {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: var(--space-2);
+  margin-top: var(--space-4);
 }
 
-.skill-tag {
-  padding: var(--space-2) var(--space-3);
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  padding: 4px 12px;
   border-radius: var(--radius-md);
-  font-size: var(--font-size-sm);
-  color: var(--text-secondary);
-  transition: all var(--transition-fast);
+  border: 1px solid var(--border-color);
+  letter-spacing: 0.02em;
 }
 
-.skill-tag:hover {
-  border-color: var(--accent-primary);
-  color: var(--text-primary);
+.legend-item::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.legend-language::before {
+  background: #6366f1;
+  box-shadow: 0 0 5px #6366f180;
+}
+
+.legend-infra::before {
+  background: #a855f7;
+  box-shadow: 0 0 5px #a855f780;
+}
+
+.legend-database::before {
+  background: #22d3ee;
+  box-shadow: 0 0 5px #22d3ee80;
+}
+
+.legend-framework::before {
+  background: #f59e0b;
+  box-shadow: 0 0 5px #f59e0b80;
+}
+
+.legend-observability::before {
+  background: #ec4899;
+  box-shadow: 0 0 5px #ec489980;
 }
 
 /* ===================================

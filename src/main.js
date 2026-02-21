@@ -829,8 +829,244 @@ const initTelemetryDashboard = async () => {
   }
 };
 
+// --- Phase 3 (V3.5): D3 Force-Directed Skills Graph ---
+const initSkillsGraph = () => {
+  const container = document.getElementById('skills-graph');
+  if (!container || typeof d3 === 'undefined') return;
+
+  // ── Color palette ─────────────────────────────────────────────
+  const COLOR = {
+    language: '#6366f1',
+    infra: '#a855f7',
+    database: '#22d3ee',
+    framework: '#f59e0b',
+    observability: '#ec4899',
+  };
+
+  // Fill = color at 30% opacity (hex alpha 4d)
+  const FILL = (group) => `${COLOR[group]}4d`;
+
+  const nodes = [
+    { id: 'Python', group: 'language', hub: true, r: 32 },
+    { id: 'Java', group: 'language', hub: true, r: 29 },
+    { id: 'AWS', group: 'infra', hub: true, r: 34 },
+    { id: 'Kubernetes', group: 'infra', hub: true, r: 32 },
+    { id: 'OpenSearch', group: 'database', hub: true, r: 27 },
+    { id: 'FastAPI', group: 'framework', hub: false, r: 16 },
+    { id: 'Flask', group: 'framework', hub: false, r: 14 },
+    { id: 'Spring Boot', group: 'framework', hub: false, r: 15 },
+    { id: 'SQL', group: 'language', hub: false, r: 13 },
+    { id: 'C++', group: 'language', hub: false, r: 12 },
+    { id: 'Lambda', group: 'infra', hub: false, r: 16 },
+    { id: 'S3', group: 'infra', hub: false, r: 14 },
+    { id: 'EKS', group: 'infra', hub: false, r: 16 },
+    { id: 'Docker', group: 'infra', hub: false, r: 15 },
+    { id: 'Helm', group: 'infra', hub: false, r: 13 },
+    { id: 'Terraform', group: 'infra', hub: false, r: 14 },
+    { id: 'Jenkins', group: 'infra', hub: false, r: 13 },
+    { id: 'PostgreSQL', group: 'database', hub: false, r: 15 },
+    { id: 'MongoDB', group: 'database', hub: false, r: 14 },
+    { id: 'Redis', group: 'database', hub: false, r: 14 },
+    { id: 'Cassandra', group: 'database', hub: false, r: 13 },
+    { id: 'DynamoDB', group: 'database', hub: false, r: 14 },
+    { id: 'FAISS', group: 'database', hub: false, r: 12 },
+    { id: 'Datadog', group: 'observability', hub: false, r: 15 },
+    { id: 'Splunk', group: 'observability', hub: false, r: 14 },
+    { id: 'Dynatrace', group: 'observability', hub: false, r: 13 },
+  ];
+
+  const links = [
+    { source: 'Python', target: 'FastAPI' },
+    { source: 'Python', target: 'Flask' },
+    { source: 'Python', target: 'SQL' },
+    { source: 'Java', target: 'Spring Boot' },
+    { source: 'Java', target: 'SQL' },
+    { source: 'AWS', target: 'Lambda' },
+    { source: 'AWS', target: 'S3' },
+    { source: 'AWS', target: 'EKS' },
+    { source: 'AWS', target: 'DynamoDB' },
+    { source: 'AWS', target: 'Terraform' },
+    { source: 'AWS', target: 'Datadog' },
+    { source: 'AWS', target: 'Splunk' },
+    { source: 'Kubernetes', target: 'EKS' },
+    { source: 'Kubernetes', target: 'Docker' },
+    { source: 'Kubernetes', target: 'Helm' },
+    { source: 'Kubernetes', target: 'Jenkins' },
+    { source: 'Kubernetes', target: 'Dynatrace' },
+    { source: 'OpenSearch', target: 'PostgreSQL' },
+    { source: 'OpenSearch', target: 'MongoDB' },
+    { source: 'OpenSearch', target: 'Redis' },
+    { source: 'OpenSearch', target: 'Cassandra' },
+    { source: 'OpenSearch', target: 'FAISS' },
+    { source: 'Python', target: 'C++' },
+  ];
+
+  // ── Dimensions ────────────────────────────────────────────────
+  const W = container.clientWidth || 800;
+  const H = container.clientHeight || 540;
+  const isMobile = window.innerWidth < 768 || 'ontouchstart' in window;
+
+  // ── SVG ───────────────────────────────────────────────────────
+  const svg = d3.select(container)
+    .append('svg')
+    .attr('width', W)
+    .attr('height', H)
+    .attr('aria-label', 'Interactive skills dependency map');
+
+  const defs = svg.append('defs');
+
+  // Dark radial gradient background for depth
+  const grad = defs.append('radialGradient')
+    .attr('id', 'graph-bg')
+    .attr('cx', '50%').attr('cy', '50%').attr('r', '60%');
+  grad.append('stop').attr('offset', '0%').attr('stop-color', '#161620');
+  grad.append('stop').attr('offset', '100%').attr('stop-color', '#0d0d10');
+
+  svg.append('rect').attr('width', W).attr('height', H).attr('fill', 'url(#graph-bg)');
+
+  // Per-color glow filters
+  Object.entries(COLOR).forEach(([key, hex]) => {
+    const f = defs.append('filter')
+      .attr('id', `glow-${key}`)
+      .attr('x', '-50%').attr('y', '-50%')
+      .attr('width', '200%').attr('height', '200%');
+    f.append('feGaussianBlur').attr('in', 'SourceGraphic').attr('stdDeviation', 6).attr('result', 'blur');
+    const m = f.append('feMerge');
+    m.append('feMergeNode').attr('in', 'blur');
+    m.append('feMergeNode').attr('in', 'SourceGraphic');
+  });
+
+  // Subtle leaf glow
+  const leafGlow = defs.append('filter').attr('id', 'glow-leaf');
+  leafGlow.append('feGaussianBlur').attr('stdDeviation', 2).attr('result', 'blur');
+  const lfm = leafGlow.append('feMerge');
+  lfm.append('feMergeNode').attr('in', 'blur');
+  lfm.append('feMergeNode').attr('in', 'SourceGraphic');
+
+  // Zoomable group
+  const g = svg.append('g');
+  svg.call(d3.zoom().scaleExtent([0.35, 3]).on('zoom', (e) => g.attr('transform', e.transform)));
+
+  // ── Simulation ────────────────────────────────────────────────
+  const sim = d3.forceSimulation(nodes)
+    .force('link', d3.forceLink(links).id(d => d.id)
+      .distance(d => (d.source.hub && d.target.hub) ? 200 : 100)
+      .strength(0.45))
+    .force('charge', d3.forceManyBody().strength(d => d.hub ? -700 : -220))
+    .force('center', d3.forceCenter(W / 2, H / 2).strength(0.08))
+    .force('collision', d3.forceCollide().radius(d => d.r + 14))
+    .force('bounds', () => {
+      const pad = 50;
+      for (const n of nodes) {
+        if (n.x < pad) n.vx += (pad - n.x) * 0.08;
+        if (n.x > W - pad) n.vx += (W - pad - n.x) * 0.08;
+        if (n.y < pad) n.vy += (pad - n.y) * 0.08;
+        if (n.y > H - pad) n.vy += (H - pad - n.y) * 0.08;
+      }
+    })
+    .alphaDecay(0.025)
+    .velocityDecay(0.4);
+
+  // ── Links ─────────────────────────────────────────────────────
+  const linkEls = g.append('g').attr('class', 'links-group')
+    .selectAll('line')
+    .data(links)
+    .join('line')
+    .attr('class', 'graph-link')
+    .attr('stroke', d => COLOR[d.source.group] || '#555')
+    .attr('stroke-dasharray', '5 4');
+
+  // ── Nodes ─────────────────────────────────────────────────────
+  const nodeEls = g.append('g').attr('class', 'nodes-group')
+    .selectAll('g.graph-node')
+    .data(nodes)
+    .join('g')
+    .attr('class', d => `graph-node${d.hub ? ' hub' : ''}`)
+    .call(d3.drag()
+      .on('start', (event, d) => {
+        if (!event.active && !isMobile) sim.alphaTarget(0.3).restart();
+        d.fx = d.x; d.fy = d.y;
+      })
+      .on('drag', (event, d) => { d.fx = event.x; d.fy = event.y; })
+      .on('end', (event, d) => {
+        if (!event.active && !isMobile) sim.alphaTarget(0);
+        d.fx = null; d.fy = null;
+      })
+    );
+
+  // Circle — richer fill
+  nodeEls.append('circle')
+    .attr('r', d => d.r)
+    .attr('fill', d => FILL(d.group))
+    .attr('stroke', d => COLOR[d.group])
+    .style('filter', d => d.hub ? `url(#glow-${d.group})` : 'url(#glow-leaf)');
+
+  // Hub labels — centered inside the circle
+  nodeEls.filter(d => d.hub)
+    .append('text')
+    .attr('class', 'hub-label')
+    .text(d => d.id);
+
+  // Leaf labels — always visible below the circle
+  nodeEls.filter(d => !d.hub)
+    .append('text')
+    .attr('class', 'leaf-label')
+    .attr('dy', d => d.r + 5) // sit just below the circle edge
+    .attr('fill', d => COLOR[d.group])
+    .text(d => d.id);
+
+  // ── Hover interactions ────────────────────────────────────────
+  nodeEls
+    .on('mouseenter', (event, hovered) => {
+      const connectedIds = new Set([hovered.id]);
+      links.forEach(l => {
+        if (l.source.id === hovered.id) connectedIds.add(l.target.id);
+        if (l.target.id === hovered.id) connectedIds.add(l.source.id);
+      });
+
+      linkEls.each(function (d) {
+        const connected = d.source.id === hovered.id || d.target.id === hovered.id;
+        d3.select(this).classed('link-highlighted', connected);
+      });
+
+      nodeEls.classed('dimmed', d => !connectedIds.has(d.id));
+    })
+    .on('mouseleave', () => {
+      linkEls.classed('link-highlighted', false);
+      nodeEls.classed('dimmed', false);
+    });
+
+  // ── Tick ──────────────────────────────────────────────────────
+  sim.on('tick', () => {
+    linkEls
+      .attr('x1', d => d.source.x).attr('y1', d => d.source.y)
+      .attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+    nodeEls.attr('transform', d => `translate(${d.x},${d.y})`);
+  });
+
+  // ── Mobile: static layout ─────────────────────────────────────
+  if (isMobile) {
+    sim.stop();
+    for (let i = 0; i < 200; ++i) sim.tick();
+    linkEls.attr('x1', d => d.source.x).attr('y1', d => d.source.y)
+      .attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+    nodeEls.attr('transform', d => `translate(${d.x},${d.y})`);
+  }
+
+  // ── IntersectionObserver ──────────────────────────────────────
+  if (!isMobile) {
+    new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { if (sim.alpha() >= sim.alphaMin()) sim.restart(); }
+        else sim.stop();
+      });
+    }, { threshold: 0.1 }).observe(container);
+  }
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   initDataPipeline();
   initDevTerminal();
   initTelemetryDashboard();
+  initSkillsGraph();
 });

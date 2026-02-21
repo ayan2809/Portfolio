@@ -58,6 +58,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/src/styles/main.css">
+  <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 </head>
 
 <body>
@@ -266,65 +267,15 @@
   <section id="skills" class="section skills">
     <div class="container">
       <h2 class="section-title">Technical Skills</h2>
-
-      <div class="skills-grid">
-        <div class="skill-category">
-          <h3>Languages</h3>
-          <div class="skill-tags">
-            <span class="skill-tag">Python</span>
-            <span class="skill-tag">Java</span>
-            <span class="skill-tag">SQL</span>
-            <span class="skill-tag">C++</span>
-          </div>
-        </div>
-
-        <div class="skill-category">
-          <h3>Frameworks</h3>
-          <div class="skill-tags">
-            <span class="skill-tag">FastAPI</span>
-            <span class="skill-tag">Flask</span>
-            <span class="skill-tag">Spring Boot</span>
-          </div>
-        </div>
-
-        <div class="skill-category">
-          <h3>Cloud & Containers</h3>
-          <div class="skill-tags">
-            <span class="skill-tag">AWS Lambda</span>
-            <span class="skill-tag">AWS S3</span>
-            <span class="skill-tag">AWS EKS</span>
-            <span class="skill-tag">Docker</span>
-            <span class="skill-tag">Kubernetes</span>
-          </div>
-        </div>
-
-        <div class="skill-category">
-          <h3>Databases</h3>
-          <div class="skill-tags">
-            <span class="skill-tag">OpenSearch</span>
-            <span class="skill-tag">Cassandra</span>
-            <span class="skill-tag">Redis</span>
-            <span class="skill-tag">FAISS</span>
-          </div>
-        </div>
-
-        <div class="skill-category">
-          <h3>Infrastructure</h3>
-          <div class="skill-tags">
-            <span class="skill-tag">Terraform</span>
-            <span class="skill-tag">CI/CD</span>
-            <span class="skill-tag">Jenkins</span>
-          </div>
-        </div>
-
-        <div class="skill-category">
-          <h3>Observability</h3>
-          <div class="skill-tags">
-            <span class="skill-tag">Splunk</span>
-            <span class="skill-tag">Datadog</span>
-            <span class="skill-tag">Dynatrace</span>
-          </div>
-        </div>
+      <p class="skills-subtitle">Backend service dependency map — hover a hub to trace connections, drag to rearrange.
+      </p>
+      <div id="skills-graph" class="skills-graph-container"></div>
+      <div class="skills-legend">
+        <span class="legend-item legend-language">Languages</span>
+        <span class="legend-item legend-infra">Infrastructure</span>
+        <span class="legend-item legend-database">Databases</span>
+        <span class="legend-item legend-framework">Frameworks</span>
+        <span class="legend-item legend-observability">Observability</span>
       </div>
     </div>
   </section>
