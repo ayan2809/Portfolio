@@ -82,6 +82,6 @@ To run this project locally, you only need Node.js installed.
 
 ## 🤝 Contact
 Feel free to reach out if you have any questions about the architecture or implementation details!
-- **Email:** (Update with your email)
+- **Email:** ayansadhukhan28@gmail.com
 - **LinkedIn:** [Ayan Sadhukhan](https://www.linkedin.com/in/ayansadhukhan/)
 - **GitHub:** [@ayan2809](https://github.com/ayan2809)
