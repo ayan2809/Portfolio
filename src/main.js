@@ -561,6 +561,52 @@ const initDevTerminal = () => {
     output.innerHTML = '';
   };
 
+  const PERSONAL_DATA = {
+    biography: {
+      short: "Ayan Sadhukhan - Backend Engineer. \"Clarity over cleverness.\"",
+      long: "Ayan Sadhukhan\n\nI build resilient, scalable backend architectures.\nFrom squeezing milliseconds out of search APIs to orchestrating microservices in Kubernetes, I love the nitty-gritty of system design.\n\nBut I'm not just code. I believe in 'Clarity over cleverness'.\nI write, I read Stoic philosophy, and I run long distances to keep my mind sharp.\n\nLet's build something that lasts."
+    },
+    interests_teasers: [
+      "Fact: I once ran a half-marathon with zero training because my friend bet me a coffee.",
+      "Detail: My mechanical keyboard is louder than my thoughts.",
+      "Fact: I apply database normalization rules to my grocery list.",
+      "Detail: I unironically enjoy reading AWS whitepapers on Sunday mornings.",
+      "Fact: I consider 'git rebase -i' a form of therapeutic meditation."
+    ],
+    quirks: {
+      reveal: "Initializing trace...\nFetching encrypted payload...\nDecrypting...\n\n    .======================================.\n    |   _      _                           |\n    |  (_)    (_)    \"404: SLEEP NOT FOUND\"|\n    |    \\    /                            |\n    |     \\  /       Fueled by excessive   |\n    |   ___\\/___     caffeine and unhandled|\n    |  |        |    exceptions.           |\n    |  | COFFEE |                          |\n    |  |        |                          |\n    |  |________|                          |\n    '======================================'\n\nSecret unlocked: I will happily spend 6 hours automating a task that takes 5 minutes to do manually."
+    }
+  };
+
+  const QUIRKY_ERRORS = [
+    "Command not found. Have you tried turning it off and on again?",
+    "404: Skill not found. I'm a backend engineer, not a magician.",
+    "I'm sorry Dave, I'm afraid I can't do that.",
+    "Error: Expected 'sudo make me a sandwich', got that garbage instead.",
+    "Look, I just route data. I don't know what you want from me.",
+    "An error occurred while displaying the previous error."
+  ];
+
+  const typeWriter = async (text, speed = 25) => {
+    const div = document.createElement('div');
+    div.className = 'terminal-log';
+    div.style.whiteSpace = 'pre-wrap'; // Ensure formatting matches newlines exactly
+    output.appendChild(div);
+
+    input.disabled = true; // Prevent input from interrupting the animation
+
+    let currentText = '';
+    for (let i = 0; i < text.length; i++) {
+      currentText += text[i];
+      div.textContent = currentText;
+      output.scrollTop = output.scrollHeight;
+      await new Promise(r => setTimeout(r, speed));
+    }
+
+    input.disabled = false;
+    input.focus();
+  };
+
   const handleCommand = async (cmd) => {
     const args = cmd.trim().split(/\s+/);
     const baseCmd = args[0].toLowerCase();
@@ -578,7 +624,9 @@ const initDevTerminal = () => {
   help      - Show this message
   clear     - Clear the terminal output
   theme     - Toggle light/dark mode (usage: theme --toggle)
-  cat       - Read a file (try: cat resume.txt)
+  whoami    - Print a brief summary
+  bio       - Read my biography (use -v or --verbose for full story)
+  ls        - List contents (try: ls /interests)
   fetch     - Fetch remote data (try: fetch leetcode)
   status    - View system diagnostic boot log
   exit      - Close the terminal session`);
@@ -598,21 +646,25 @@ const initDevTerminal = () => {
         }
         break;
 
-      case 'cat':
-        if (args[1] === 'resume.txt') {
-          printLog(`
-Ayan Sadhukhan
-------------------
-ROLE: Senior Backend Engineer
-AT:   JPMorgan Chase & Co.
+      case 'whoami':
+        printLog(PERSONAL_DATA.biography.short);
+        break;
 
-CORE: Java, Python, Golang
-INFRA: AWS, Kubernetes, Helm, Docker
-DB:    PostgreSQL, MongoDB, OpenSearch, DynamoDB
-
->> "Clarity over cleverness."`);
+      case 'bio':
+        if (args.includes('--verbose') || args.includes('-v')) {
+          await typeWriter(PERSONAL_DATA.biography.long);
         } else {
-          printLog(`cat: ${args[1] || 'no file specified'}: No such file or directory`);
+          printLog(PERSONAL_DATA.biography.short);
+        }
+        break;
+
+      case 'ls':
+        if (args[1] === '/interests') {
+          const teasers = PERSONAL_DATA.interests_teasers;
+          const randomTeaser = teasers[Math.floor(Math.random() * teasers.length)];
+          printLog(randomTeaser);
+        } else {
+          printLog(`ls: ${args[1] || ''}: No such directory. Try 'ls /interests'`);
         }
         break;
 
@@ -651,11 +703,16 @@ Recent Activity: Consistent daily submissions.`);
         break;
 
       case 'sudo':
-        printLog(`ayan is not in the sudoers file. This incident will be reported.`);
+        if (args.includes('--reveal')) {
+          await typeWriter(PERSONAL_DATA.quirks.reveal, 10);
+        } else {
+          printLog(`ayan is not in the sudoers file. This incident will be reported.`);
+        }
         break;
 
       default:
-        printLog(`bash: ${baseCmd}: command not found`);
+        const randomError = QUIRKY_ERRORS[Math.floor(Math.random() * QUIRKY_ERRORS.length)];
+        printLog(`bash: ${baseCmd}: ${randomError}`, 'error');
     }
   };
 
@@ -914,15 +971,6 @@ const initSkillsGraph = () => {
     .attr('aria-label', 'Interactive skills dependency map');
 
   const defs = svg.append('defs');
-
-  // Dark radial gradient background for depth
-  const grad = defs.append('radialGradient')
-    .attr('id', 'graph-bg')
-    .attr('cx', '50%').attr('cy', '50%').attr('r', '60%');
-  grad.append('stop').attr('offset', '0%').attr('stop-color', '#161620');
-  grad.append('stop').attr('offset', '100%').attr('stop-color', '#0d0d10');
-
-  svg.append('rect').attr('width', W).attr('height', H).attr('fill', 'url(#graph-bg)');
 
   // Per-color glow filters
   Object.entries(COLOR).forEach(([key, hex]) => {
